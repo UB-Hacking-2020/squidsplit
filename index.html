@@ -8,33 +8,40 @@
 <body>
 <h1>The Sentence GeneratorInator.</h1>
 <br>
+<form>
 <h2>Add more refrence data</h2>
+  <label for="Yname">Youtube_Url</label><br>
+  <input type="text" id="Yname" name="Yname">
+</form>
 <br>
-insert your youtube URL here
 <br>
 <h3>Insert the person whose voice this video corresponds to here</h3>
 maybe make this a drop down menu of existing people, may be hard to integrate
 <!-- perhaps just make this a string insertion section that gets checked in the python -->
 <br>
 <br>
+<form>
 <h2>Sentence generator</h2>
-add text field that can be accessed by the code here
+</form>
+<!--add text field that can be accessed by the code here-->
 <br>
+<!--make this a multi part form that passes the info on to the bottle server-->
 put an iframe for video
 <br>
 <h3>Testing with the copyright free song "the cannery" by kevin macleod</h3>
 			<div class="bar_audio">
 			<audio controls>
-				<source id="The Cannery">
-				<!-- swap the id back to "player"-->
-					</audio>
+				<source id="player">
+				<!-- swap the id back to "player" and src= to id=-->
+			</audio>
 			</div>
 <br>
 <br>
 <h4>copyright 2020. Team Squidward limited</h4>
 
 <script>
-	let filename = "Big Balls.mp3"
+	//listen for a post request from when sentence is submitted
+	let filename = "The Cannery.mp3"
 	document.getElementsByClassName("player").src = filename
 	// inject from backend
 </script>
