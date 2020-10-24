@@ -12,6 +12,7 @@
 <h2>Add more refrence data</h2>
   <label for="Yname">Youtube_Url</label><br>
   <input type="text" id="Yname" name="Yname">
+	<input type="submit" value="Submit">
 </form>
 <br>
 <br>
@@ -20,8 +21,12 @@ maybe make this a drop down menu of existing people, may be hard to integrate
 <!-- perhaps just make this a string insertion section that gets checked in the python -->
 <br>
 <br>
-<form>
+
 <h2>Sentence generator</h2>
+<form action="/form-path" method="post" >
+	 <label for="form-name">Enter your sentence: </label><br/>
+ 	<input id="form-name" type="text" name="input_sentence"><br/>
+	 <input type="submit" value="Submit">
 </form>
 <!--add text field that can be accessed by the code here-->
 <br>
