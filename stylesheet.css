@@ -1,0 +1,12 @@
+body {
+	background-color: darkgrey;
+	-webkit-animation:mymove 5s infinite;
+	animation: mymove 30s ;}
+	@-webkit-keyframes mymove{
+		from{background-color:lightgrey;}
+		to {background-color:darkgrey;}
+	}
+	body{
+		background:red;
+		background:linear-gradient(grey, orange, blue);
+	}

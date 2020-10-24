@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+		<link rel="stylesheet" type="text/css" href="stylesheet.css">
     <meta charset="UTF-8">
     <title>The sentence from videosInator!</title>
 </head>
 <body>
 <h1>The Sentence GeneratorInator.</h1>
 <br>
-<h2>Word source adder</h2>
+<h2>Add more refrence data</h2>
 <br>
 insert your youtube URL here
 <br>
@@ -20,8 +20,24 @@ maybe make this a drop down menu of existing people, may be hard to integrate
 <h2>Sentence generator</h2>
 add text field that can be accessed by the code here
 <br>
+put an iframe for video
+<br>
+<h3>Testing with the ACDC songs "big balls"</h3>
+			<div class="bar_audio">
+			<audio controls>
+				<source id="Big Balls.mp3">
+				<!-- swap the id back to "player"-->
+					</audio>
+			</div>
+<br>
 <br>
 <h4>copyright 2020. Team Squidward limited</h4>
+
+<script>
+	let filename = "Big Balls.mp3"
+	document.getElementsByClassName("player").src = filename
+	// inject from backend
+</script>
 
 
 
