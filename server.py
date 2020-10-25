@@ -1,6 +1,6 @@
 from flask import Flask, request, send_from_directory
 import json
-import RK, stitcher
+import interface, stitcher
 from flask_cors import CORS
 
 app = Flask('squidsplit')
@@ -15,7 +15,7 @@ def spliceAndStitch():
     text = wossname["text"].lower()
     if not text.endswith("."):
         text += "."
-    RK.completeSlicer(url)
+    interface.completeSlicer(url)
     resp = Flask.make_response(app, stitcher.stringToMp3(url[-11:], text))
     resp.headers["Access-Control-Allow-Origin"] = "*"
     return resp

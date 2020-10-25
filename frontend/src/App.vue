@@ -35,10 +35,10 @@
       </div>
       <v-col>
         <div :hidden="hidden" class="bar_audio">
-<!--          <audio v-if="!loading" controls>-->
-<!--            <source :src="filename">-->
-<!--            &lt;!&ndash; swap the id back to "player" and src= to id=&ndash;&gt;-->
-<!--          </audio>-->
+          <audio v-if="!loading" controls ref="audioplayer">
+            <source :src="filename" >
+            <!-- swap the id back to "player" and src= to id=-->
+          </audio>
           <v-btn :hidden="hidden" :href="filename" icon>
             <v-icon>mdi-download</v-icon>
           </v-btn>
@@ -55,7 +55,6 @@ export default {
   name: 'App',
 
   data: () => ({
-    items: ["Jesse Hartloff", "Andrew Hughes"],
     loading: false,
     filename: "",
     hidden: true,
@@ -80,6 +79,7 @@ export default {
       this.url = "";
       this.name = "";
       this.text = "";
+      this.$refs.audioplayer.load();
     }
   }),
 };
