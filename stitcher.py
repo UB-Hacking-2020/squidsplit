@@ -47,7 +47,9 @@ def getMp3FromWord(id: str, word: str) -> str:
     directory = ""
     extension = ".mp3"
     IdPath = toDirectory(["data", id, word + extension])
+    print(IdPath)
     genericPath = toDirectory(["data", "generic", word + extension])
+    print(genericPath)
     if (os.path.exists(IdPath)):
         directory = IdPath
     elif (os.path.exists(genericPath)):
