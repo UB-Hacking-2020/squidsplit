@@ -24,7 +24,7 @@
           <v-text-field label="Video URL" :v-bind="url"></v-text-field>
         </v-col>
         <v-col>
-          <v-combobox label="Person Name" :items="items" :v-bind="name"></v-combobox>
+          <v-combobox label="Person Name" :items="items" :v-bind="name" disabled></v-combobox>
         </v-col>
         <v-col>
           <v-text-field label="Input Text" :v-bind="text"></v-text-field>
@@ -39,7 +39,9 @@
             <source :src="filename">
             <!-- swap the id back to "player" and src= to id=-->
           </audio>
-          <v-btn icon :hidden="hidden" :href="filename"><v-icon>mdi-download</v-icon></v-btn>
+          <v-btn icon :hidden="hidden" :href="filename">
+            <v-icon>mdi-download</v-icon>
+          </v-btn>
         </div>
       </v-col>
     </v-main>
@@ -60,7 +62,9 @@ export default {
     name: "",
     text: "",
     sendData: async function () {
-      await this.ajaxPostRequest("path", "data", this.showData)
+      let data = "{'url': this.url, 'name': this.name, 'text': this.text}"
+      data = JSON.parse(data)
+      await this.ajaxPostRequest("/request", data, this.showData)
       this.loading = true
     },
 
