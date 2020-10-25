@@ -88,6 +88,6 @@ def stitchMp3s(mp3s: [str], outputFilePath: str) -> bool:
 def stringToMp3(sourceFolderName: str, string: str) -> str:
     words = splitIntoWords(string)
     paths = getMp3sFromWords(sourceFolderName, words)
-    outputFileName = "data/out/{}.mp3".format(time.strftime("%Y%m%d-%H%M%S"))
+    outputFileName = "data/output/{}.mp3".format(time.strftime("%Y%m%d-%H%M%S"))
     stitchMp3s(paths, outputFileName)
     return outputFileName
