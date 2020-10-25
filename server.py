@@ -1,18 +1,25 @@
-from bottle import route, run, static_file
-import RK
+from flask import Flask, request, send_from_directory
+import json
+import interface, stitcher
+from flask_cors import CORS
 
-@route('/')
-def index():
-    return static_file("index.html", root='')
+app = Flask('squidsplit')
+CORS(app)
 
-@route('/stylesheet.css')
-def style():
-    return static_file("stylesheet.css", root='')
 
-@route('/splicer')
-def splice(youtubeURL):
-    RK.downloadAsMP3(youtubeURL)
-    IBMjson = RK.youtubeIBManalysis(youtubeURL[-11:])
-    RK.mp3AndTimestampsToSpliced(IBMjson, youtubeURL[-11:])
+@app.route('/request', methods=['POST'])
+def spliceAndStitch():
+    inputJSON = request.get_data()
+    wossname = json.loads(inputJSON)
+    url = wossname["url"]
+    text = wossname["text"].lower()
+    if not text.endswith("."):
+        text += "."
+    interface.completeSlicer(url)
+    resp = Flask.make_response(app, stitcher.stringToMp3(url[-11:], text))
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    return resp
 
-run(host='localhost', port=8080, debug=True)
+@app.route('/data/output/<path:path>')
+def output(path):
+    return send_from_directory('data/output/', path)

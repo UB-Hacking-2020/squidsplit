@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+token.txt
+youtube-dl.exe
+data/
+ffmpeg.exe
+ffprobe.exe
