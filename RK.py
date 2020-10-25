@@ -29,10 +29,15 @@ def mp3AndTimestampsToSpliced(IBMjson, mp3filename):
 def downloadAsMP3(uri):
     os.system("youtube-dl -x --audio-format mp3 --audio-quality 192k -o 'data/input/%(id)s.%(ext)s' {}").format(uri)
 
-def youtubeIBManalysis(mp3filename):
-    authenticator = IAMAuthenticator('7WQCYjlvMljSRoxn3rBU7wFph7fs_yGk4GaeDgdNGqoB')
+def youtubeIBManalysis(mp3filename, tokenfilename):
+    f = open(tokenfilename, "r")
+    APItoken = f.readline()
+    serviceurl = f.readline()
+    f.close()
+
+    authenticator = IAMAuthenticator(APItoken)
     service = SpeechToTextV1(authenticator=authenticator)
-    service.set_service_url('https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/c4d81bfe-0824-49b0-bc2a-454f2a9651c8')
+    service.set_service_url(serviceurl)
 
     models = service.list_models().get_result()
     print(json.dumps(models, indent=2))
