@@ -14,7 +14,9 @@ def style():
 def spliceAndStitch(inputJSON):
     wossname = json.loads(inputJSON)
     url = wossname["url"]
-    text = wossname["text"]
+    text = wossname["text"].lower()
+    if not text.endswith("."):
+        text += "."
     RK.completeSlicer(url)
     return "data/output/" + stitcher.stringToMp3(url[-11:], text)
 
