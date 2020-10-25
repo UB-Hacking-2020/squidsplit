@@ -24,12 +24,12 @@ def mp3AndTimestampsToSpliced(IBMjson, mp3filename, directory):
         path = "data/" + directory + "/" + word + ".mp3"
         spliced.export(path, format="mp3")
 
-# LANA WROTE THIS FUNCTION!!!
 def downloadAsMP3(uri):
     if not os.path.isfile("data/input/" + uri[-11:] + ".mp3"):
         os.system("youtube-dl.exe -x --audio-format mp3 --audio-quality 192k -o data/input/%(id)s.%(ext)s {}".format(uri))
 
 def youtubeIBManalysis(mp3filename, tokenfilename):
+    print("[watson] Starting upload to IBM...")
     f = open(tokenfilename, "r")
     APItoken = f.readline().strip("\n")
     serviceurl = f.readline()
@@ -52,7 +52,8 @@ def youtubeIBManalysis(mp3filename, tokenfilename):
                 audio=audio_file,
                 content_type='audio/mp3',
                 timestamps=True,
-                word_confidence=True).get_result(),
+                word_confidence=False,
+                speech_detector_sensitivity=1.0).get_result(),
             indent=2)
 
 def completeSlicer(url):

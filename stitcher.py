@@ -85,7 +85,7 @@ def stitchMp3s(mp3s: [str], outputFilePath: str) -> bool:
     return True
 
 
-# Takes a source folder for the MP3 root, such as "jesse" and a string that we want the user to say
+# Takes a source folder for the MP3 root and a string that we want the user to say
 # Returns a path to the final MP3
 def stringToMp3(sourceFolderName: str, string: str) -> str:
     words = splitIntoWords(string)
