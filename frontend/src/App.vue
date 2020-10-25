@@ -21,25 +21,25 @@
     <v-main>
       <div>
         <v-col>
-          <v-text-field label="Video URL" :v-bind="url"></v-text-field>
+          <v-text-field v-model="url" label="Video URL"></v-text-field>
         </v-col>
         <v-col>
-          <v-combobox label="Person Name" :items="items" :v-bind="name" disabled></v-combobox>
+          <v-combobox :items="items" v-model="name" disabled label="Person Name"></v-combobox>
         </v-col>
         <v-col>
-          <v-text-field label="Input Text" :v-bind="text"></v-text-field>
+          <v-text-field v-model="text" label="Input Text"></v-text-field>
         </v-col>
         <v-col>
-          <v-btn color="secondary" :loading="loading" @click="sendData()">Submit</v-btn>
+          <v-btn :loading="loading" @click="sendData()" color="secondary">Submit</v-btn>
         </v-col>
       </div>
       <v-col>
-        <div class="bar_audio" :hidden="hidden">
-          <audio controls>
-            <source :src="filename">
-            <!-- swap the id back to "player" and src= to id=-->
-          </audio>
-          <v-btn icon :hidden="hidden" :href="filename">
+        <div :hidden="hidden" class="bar_audio">
+<!--          <audio v-if="!loading" controls>-->
+<!--            <source :src="filename">-->
+<!--            &lt;!&ndash; swap the id back to "player" and src= to id=&ndash;&gt;-->
+<!--          </audio>-->
+          <v-btn :hidden="hidden" :href="filename" icon>
             <v-icon>mdi-download</v-icon>
           </v-btn>
         </div>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   name: 'App',
@@ -62,30 +63,23 @@ export default {
     name: "",
     text: "",
     sendData: async function () {
-      let data = "{'url': this.url, 'name': this.name, 'text': this.text}"
-      data = JSON.parse(data)
-      await this.ajaxPostRequest("/request", data, this.showData)
-      this.loading = true
+      let data = {
+        "url": this.url,
+        "name": this.name,
+        "text": this.text
+      };
+      data = JSON.stringify(data);
+      axios.post("http://localhost:5000/request", data).then(response => {this.showData(response)});
+      // this.loading = true;
     },
 
     showData: async function (data) {
-      this.hidden = false
-      this.loading = false
-      this.filename = data
-      this.url = ""
-      this.name = ""
-      this.text = ""
-    },
-
-    ajaxPostRequest: async function (path, data, callback) {
-      let request = new XMLHttpRequest();
-      request.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-          callback(this.response);
-        }
-      };
-      request.open("POST", path);
-      request.send(data);
+      this.hidden = false;
+      this.loading = false;
+      this.filename = "http://localhost:5000/" + data.data;
+      this.url = "";
+      this.name = "";
+      this.text = "";
     }
   }),
 };

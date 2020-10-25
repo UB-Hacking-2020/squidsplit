@@ -4,8 +4,6 @@ import os
 from pydub import AudioSegment
 from os.path import join, dirname
 from ibm_watson import SpeechToTextV1
-from ibm_watson.websocket import RecognizeCallback, AudioSource
-import threading
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 # IBMjson should be the JSON provided by the IBM voice recog, whether JSON format or the string
@@ -29,7 +27,7 @@ def mp3AndTimestampsToSpliced(IBMjson, mp3filename, directory):
 # LANA WROTE THIS FUNCTION!!!
 def downloadAsMP3(uri):
     if not os.path.isfile("data/input/" + uri[-11:] + ".mp3"):
-        os.system("youtube-dl -x --audio-format mp3 --audio-quality 192k -o data/input/%(id)s.%(ext)s {}".format(uri))
+        os.system("youtube-dl.exe -x --audio-format mp3 --audio-quality 192k -o data/input/%(id)s.%(ext)s {}".format(uri))
 
 def youtubeIBManalysis(mp3filename, tokenfilename):
     f = open(tokenfilename, "r")
